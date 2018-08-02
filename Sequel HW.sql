@@ -78,10 +78,11 @@ SELECT s.first_name, s.last_name, a.address
 	JOIN address a ON a.address_id = s.address_id;
     
 -- 6b
-SELECT s.staff_id, s.first_name, s.last_name, SUM(p.amount)
+SELECT s.first_name, s.last_name, s.staff_id, SUM(p.amount)
 	FROM staff s
-	JOIN payment p ON p.staff_id = s.staff_id 
-	AND p.payment_date LIKE '2005-08';    
+    JOIN payment p ON p.staff_id = s.staff_id
+	WHERE p.payment_date LIKE '2005-08%'
+    GROUP BY 1,2,3;  
 
 -- 6c
 SELECT f.title, SUM(a. actor_id) AS number_actors
